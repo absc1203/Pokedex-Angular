@@ -1,0 +1,27 @@
+<div class="container">
+
+    <div class="row d-flex justify-content-center">
+
+        <div class="col-md-10">
+            <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nome</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pokemon of pokemons">
+                    <td>{{pokemon.id}}</td>
+                    <td>{{pokemon.name}}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+</div>
+
+
+
+
+
