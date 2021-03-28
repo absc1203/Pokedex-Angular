@@ -2,24 +2,34 @@
 
     <div class="row d-flex justify-content-center">
 
-        <div class="col-md-10">
-            <table class="table">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nome</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let pokemon of pokemons">
-                    <td>{{pokemon.id}}</td>
-                    <td>{{pokemon.name}}</td>
-                  </tr>
-                </tbody>
-              </table>
-        </div>
+       
+
+          <div class="card ml-3 mb-3 text-center " style="width: 12rem;" *ngFor="let pokemon of pokemons | orderBy : key : reverse | paginate : {itemsPerPage: 20, currentPage : page, totalItems: totalPokemons}">
+            <img class="card-img-top" src="{{pokemon.sprites.front_default}}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title text-uppercase">{{pokemon.name}}</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><b>Height:</b> {{pokemon.height}}</li>
+              <li class="list-group-item"><b>Health:</b> {{pokemon.stats[0].base_stat}}</li>
+              <li class="list-group-item"><b>Attack:</b> {{pokemon.stats[1].base_stat}}</li>
+              <li class="list-group-item"><b>Defense:</b> {{pokemon.stats[2].base_stat}}</li>
+              <li class="list-group-item"><b>Type:</b> {{pokemon.types[0].type.name}}</li>
+            </ul>
+            <div class="card-body">
+              <a href="#" class="card-link">Card link</a>
+            </div>
+          </div>
+
+        
     </div>
 </div>
+
+<div class="row d-flex justify-content-center">
+  <pagination-controls (pageChange)="nextPage($event); pokemons = []; getPokemons()"></pagination-controls>
+
+</div>
+
 
 
 
