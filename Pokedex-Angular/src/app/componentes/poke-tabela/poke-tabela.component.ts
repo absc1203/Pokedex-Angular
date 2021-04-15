@@ -12,8 +12,12 @@ export class PokeTabelaComponent implements OnInit {
   pokemons: any[] = []
   key = 'id'
   reverse = false
+
+  
   page = 1
   totalPokemons: number = this.pokemons.push()
+  offset = 0
+  limit = 20
 
   constructor(
     private pokemonService: PokemonService
@@ -24,7 +28,7 @@ export class PokeTabelaComponent implements OnInit {
   }
 
   getPokemons(){
-    this.pokemonService.getPokemons(10, this.page + (-1))
+    this.pokemonService.getPokemons(this.offset, this.limit)
       .subscribe((resp:any) => {
         this.totalPokemons = resp.count
         resp.results.forEach((result:any) => {
@@ -33,15 +37,17 @@ export class PokeTabelaComponent implements OnInit {
             this.pokemons.push(resp);
         })
       });
-      console.log(resp)
     })
-    
   }
 
   nextPage(event:any){
-    this.page = event
-  }
-      
 
+    this.page = event  
+    this.offset = this.offset + 20
+    
+    
+  }
+
+    
 
 }
